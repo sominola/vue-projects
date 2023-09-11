@@ -1,9 +1,17 @@
 import axios from "axios";
 import {useAuthStore} from "@/stores/auth";
 import {AuthService} from "@/services/auth.service"
-const API_URL = (import.meta as any).env.VITE_API_URL
+import router from "@/router";
+import {useGlobalStore} from "@/stores/global";
+import {globalStore} from "@/main";
 
-const authStore = useAuthStore();
+const API_URL = (import.meta as any).env.VITE_API_URL;
+
+let authStore: any;
+
+router.beforeEach(() => {
+    authStore = useAuthStore();
+})
 
 const $api = axios.create({
     withCredentials: true,
@@ -13,13 +21,13 @@ const $api = axios.create({
 let countPending = 0;
 const requestFinished = () => {
     countPending--;
-    /* if (countPending === 0)
-        insProgress.finish(); */
+    if (countPending === 0)
+        globalStore.finish();
 }
 
 
 $api.interceptors.request.use(async (config) => {
-    // insProgress.start()
+    globalStore.start();
     countPending++;
 
     const accessToken = localStorage.getItem('access_token');
@@ -32,7 +40,7 @@ $api.interceptors.request.use(async (config) => {
 })
 
 async function refreshAccessToken() {
-    
+
     if (!authStore) {
         throw Error('Please inject store in refresh-token-interceptor');
     }

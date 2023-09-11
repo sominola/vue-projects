@@ -8,7 +8,7 @@ export class AuthService {
         return await $api.post<AuthUserDto>('/auth/login', auth);
     }
 
-    static async registration(auth: SignUpDto): AxiosPromise<AuthUserDto> {
+    static async signUp(auth: SignUpDto): AxiosPromise<AuthUserDto> {
         return await $api.post<AuthUserDto>('/auth/register', auth);
     }
 

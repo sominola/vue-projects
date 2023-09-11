@@ -29,7 +29,6 @@ watch(() => switchState.value!, (isDark) => {
       <IconLogo />
       <span class="font-bold text-xl text-foreground">Sociality</span>
     </div>
-    <button @click="() => toast.success('tEST')">sdfsdf</button>
     <div class="flex gap-5 flex-row">
       <router-link to="/sign-in" class="hidden-item font-bold bg-border px-4 py-1 rounded-lg
       hover:opacity-80 hover:cursor-pointer">Sign In
