@@ -1,8 +1,7 @@
 ﻿<script setup lang="ts">
 import IconLogo from "@/components/icons/IconLogo.vue";
 import IconProfile from "@/components/icons/IconProfile.vue";
-import { ref, watch } from "vue";
-import { toast } from 'vue-sonner'
+import { computed, ref } from "vue";
 import {
   MenubarContent,
   MenubarItem,
@@ -11,17 +10,17 @@ import {
   MenubarRoot,
   MenubarTrigger, SwitchRoot, SwitchThumb
 } from "radix-vue";
+import { useGlobalStore } from "@/stores/global";
+import { storeToRefs } from "pinia";
+import { useAuthStore } from "@/stores/auth";
 
 
 const currentMenu = ref('')
-const switchState = ref(false);
+const globalStore = useGlobalStore();
+const authStore = useAuthStore();
+const { isDarkTheme } = storeToRefs(globalStore);
+const user = computed(() => authStore.user)
 
-watch(() => switchState.value!, (isDark) => {
-  if (isDark)
-    document.documentElement.setAttribute('data-theme', 'dark');
-  else
-    document.documentElement.setAttribute('data-theme', 'light');
-})
 </script>
 <template>
   <div class="h-14 px-3 py-2 flex flex-row gap-5 justify-between items-center">
@@ -30,10 +29,10 @@ watch(() => switchState.value!, (isDark) => {
       <span class="font-bold text-xl text-foreground">Sociality</span>
     </div>
     <div class="flex gap-5 flex-row">
-      <router-link to="/sign-in" class="hidden-item font-bold bg-border px-4 py-1 rounded-lg
+      <router-link v-if="!user" to="/sign-in" class="hidden-item font-bold bg-border px-4 py-1 rounded-lg
       hover:opacity-80 hover:cursor-pointer">Sign In
       </router-link>
-      <router-link to="/sign-up" class="hidden-item font-bold text-white bg-violet px-4 py-1 rounded-lg
+      <router-link v-if="!user" to="/sign-up" class="hidden-item font-bold text-white bg-violet px-4 py-1 rounded-lg
       hover:opacity-80 hover:cursor-pointer">Sign Up
       </router-link>
       <div>
@@ -45,7 +44,7 @@ watch(() => switchState.value!, (isDark) => {
             <MenubarPortal>
               <MenubarContent class="min-w-[220px] bg-accents-1 p-3 shadow-xl rounded-lg" align="start" :side-offset="5"
                 :align-offset="-3">
-                <MenubarItem class="h-[30px] gap-5 hidden visible-item mb-5 justify-center">
+                <MenubarItem v-if="!user" class="h-[30px] gap-5 hidden visible-item mb-5 justify-center">
                   <router-link to="/sign-in" class="font-bold bg-border px-4 py-1
                   rounded-lg hover:opacity-80 hover:cursor-pointer">Sign In
                   </router-link>
@@ -56,7 +55,7 @@ watch(() => switchState.value!, (isDark) => {
                 <MenubarItem disabled>
                   <div class="flex items-center justify-between">
                     <label class="select-none cursor-pointer" for="dark-mode">Dark mode</label>
-                    <SwitchRoot id="dark-mode" v-model:checked="switchState" class="w-[38px] h-[21px] cursor-pointer
+                    <SwitchRoot id="dark-mode" v-model:checked="isDarkTheme" class="w-[38px] h-[21px] cursor-pointer
                             flex border-violet border-2 rounded-full
                            data-[state=unchecked]:border-accents-6">
                       <SwitchThumb class="w-[11px] h-[11px] my-auto bg-violet rounded-full

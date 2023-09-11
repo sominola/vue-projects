@@ -4,7 +4,7 @@ import type { AxiosPromise } from "axios";
 
 export class AuthService {
 
-    static async login(auth: SignInDto): AxiosPromise<AuthUserDto> {
+    static async signIn(auth: SignInDto): AxiosPromise<AuthUserDto> {
         return await $api.post<AuthUserDto>('/auth/login', auth);
     }
 
@@ -13,7 +13,7 @@ export class AuthService {
     }
 
     static async logout(refreshToken: string): AxiosPromise<void> {
-        return await $api.post<void>('/auth/revoke', {refreshToken: refreshToken});
+        return await $api.post<void>('/auth/revoke', { refreshToken: refreshToken });
     }
 
     static async refreshToken(tokens: TokensDto): AxiosPromise<TokensDto> {

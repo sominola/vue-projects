@@ -5,15 +5,21 @@ import { createPinia } from 'pinia'
 
 import App from './App.vue'
 import router from './router'
-import {useGlobalStore} from "@/stores/global";
+import { useGlobalStore, type GlobalStore } from "@/stores/global";
+import { AuthService } from './services/auth.service'
+import { useAuthStore, type AuthStore } from './stores/auth'
 
 const app = createApp(App)
-export let globalStore: typeof useGlobalStore;
 app.use(createPinia())
 app.use(router)
 
-router.beforeEach(() => {
+export let globalStore: GlobalStore;
+router.beforeEach(async () => {
     globalStore = useGlobalStore();
+    const hasToken = () => localStorage.getItem('access_token') != null;
+    const initUser = hasToken() ? (await AuthService.getCurrentUser()).data : null;
+    const authStore = useAuthStore() as any;
+    authStore.user = initUser;
 })
 
 app.mount('#app')

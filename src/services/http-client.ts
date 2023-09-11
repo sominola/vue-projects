@@ -1,16 +1,9 @@
 import axios from "axios";
-import {useAuthStore} from "@/stores/auth";
-import {AuthService} from "@/services/auth.service"
-import router from "@/router";
-import {globalStore} from "@/main";
+import { AuthService } from "@/services/auth.service"
+import { globalStore } from "@/main";
+import { useAuthStore } from "@/stores/auth";
 
 const API_URL = (import.meta as any).env.VITE_API_URL;
-
-let authStore: any;
-
-router.beforeEach(() => {
-    authStore = useAuthStore();
-})
 
 const $api = axios.create({
     withCredentials: true,
@@ -39,6 +32,8 @@ $api.interceptors.request.use(async (config) => {
 })
 
 async function refreshAccessToken() {
+
+    const authStore = useAuthStore();
 
     if (!authStore) {
         throw Error('Please inject store in refresh-token-interceptor');

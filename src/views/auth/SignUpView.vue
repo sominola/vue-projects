@@ -13,7 +13,7 @@ const { handleSubmit, meta } = useForm<SignUpDto>({
 const authStore = useAuthStore();
 
 const onSubmit = handleSubmit(values => {
-  authStore.signIn(values)
+  authStore.signUp(values);
 });
 
 </script>
@@ -23,9 +23,11 @@ const onSubmit = handleSubmit(values => {
     <h3 class="text-xl font-bold">Sign Up</h3>
     <form @submit="onSubmit" autocomplete="on" class="flex flex-col gap-5 w-full
                 max-w-[400px] bg-accents-1 p-6 rounded-xl">
+      <FormInput name="firstName" placeholder="Enter First name" title="First name" />
+      <FormInput name="lastName" placeholder="Enter Last name" title="Last name" />
       <FormInput name="email" placeholder="Enter email" title="Email" />
-      <FormInput name="password" placeholder="Enter password" title="Password" />
-      <FormInput name="passwordConfirm" placeholder="Enter email" title="Confirm password" />
+      <FormInput name="password" placeholder="Enter password" title="Password" type="password" />
+      <FormInput name="passwordConfirm" placeholder="Enter email" title="Confirm password" type="password" />
       <ButtonInput :disabled="!meta.valid" name="Submit" />
     </form>
   </div>
