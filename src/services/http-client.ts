@@ -2,7 +2,6 @@ import axios from "axios";
 import {useAuthStore} from "@/stores/auth";
 import {AuthService} from "@/services/auth.service"
 import router from "@/router";
-import {useGlobalStore} from "@/stores/global";
 import {globalStore} from "@/main";
 
 const API_URL = (import.meta as any).env.VITE_API_URL;

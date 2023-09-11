@@ -1,10 +1,10 @@
-﻿import {AxiosError, AxiosResponse} from "axios";
+﻿import {AxiosError, type AxiosResponse} from "axios";
 import {type Error} from "@/types/types";
 
 export const checkIfHttpError = (response: AxiosResponse) => {
     const isError = response instanceof AxiosError;
     const serializeHttpError = (error: AxiosError): Error => {
-        let errorMessage = (error.response?.data as any)?.message || error.message;
+        const errorMessage = (error.response?.data as any)?.message || error.message;
         return {message: errorMessage, errorCode: error.code as string};
     };
 
