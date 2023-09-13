@@ -24,7 +24,7 @@ const onSubmit = handleSubmit(values => {
     <form @submit="onSubmit" autocomplete="on" class="flex flex-col gap-5 w-full max-w-[400px] 
          bg-accents-1 p-6 rounded-xl">
       <FormInput name="email" placeholder="Enter email" title="Email" />
-      <FormInput name="password" placeholder="Enter password" title="Password" />
+      <FormInput type="password" name="password" placeholder="Enter password" title="Password" />
       <ButtonInput :disabled="!meta.valid" name="Submit" />
     </form>
   </div>

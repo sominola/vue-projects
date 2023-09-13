@@ -6,6 +6,9 @@ import { toast } from 'vue-sonner';
 const HomeView = () => import('@/views/HomeView.vue')
 const SignUpView = () => import('@/views/auth/SignUpView.vue')
 const SignInView = () => import('@/views/auth/SignInView.vue')
+const SettingsView = () => import('@/views/settings/SettingsVue.vue');
+const UserProfileView = () => import('@/views/settings/profile/UserProfileView.vue');
+const ActiveSessionsView = () => import('@/views/settings/active-sessions/ActiveSessionsView.vue');
 
 const authGuard: NavigationGuard = async (to, from, next) => {
     if (localStorage.getItem('access_token'))
@@ -50,6 +53,24 @@ const router = createRouter({
                     name: 'test',
                     component: Test,
                     meta: { requiresAuth: true }
+                },
+                {
+                    path: 'settings',
+                    name: 'settings',
+                    component: SettingsView,
+                    meta: { requiresAuth: true },
+                    children: [
+                        {
+                            path: 'profile',
+                            name: 'profile',
+                            component: UserProfileView
+                        },
+                        {
+                            path: 'sessions',
+                            name: 'sessions',
+                            component: ActiveSessionsView
+                        }
+                    ]
                 }
             ]
         },
@@ -58,10 +79,8 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
     if (to.matched.some(record => record.meta.requiresAuth === true)) {
-        console.log('AuthGuard')
         authGuard(to, from, next);
     } else if (to.matched.some(record => record.meta.requiresAuth === false)) {
-        console.log('NoAuthGuard')
         noAuthGuard(to, from, next);
     }
     else {

@@ -1,7 +1,7 @@
 ﻿<script setup lang="ts">
 import IconLogo from "@/components/icons/IconLogo.vue";
 import IconProfile from "@/components/icons/IconProfile.vue";
-import { computed, ref } from "vue";
+import { computed, ref, watch } from "vue";
 import {
   MenubarContent,
   MenubarItem,
@@ -19,6 +19,16 @@ const currentMenu = ref('')
 const globalStore = useGlobalStore();
 const authStore = useAuthStore();
 const { isDarkTheme } = storeToRefs(globalStore);
+watch(isDarkTheme, () => {
+  if (isDarkTheme.value) {
+    localStorage.setItem('theme', 'dark');
+    document.documentElement.setAttribute('data-theme', 'dark');
+  }
+  else {
+    localStorage.setItem('theme', 'light');
+    document.documentElement.setAttribute('data-theme', 'light');
+  }
+});
 const user = computed(() => authStore.user)
 
 </script>
@@ -42,8 +52,8 @@ const user = computed(() => authStore.user)
               <IconProfile />
             </MenubarTrigger>
             <MenubarPortal>
-              <MenubarContent class="min-w-[220px] bg-accents-1 p-3 shadow-xl rounded-lg" align="start" :side-offset="5"
-                :align-offset="-3">
+              <MenubarContent class="flex flex-col gap-5 min-w-[220px] bg-accents-1 p-3 shadow-xl rounded-lg"
+                align="start" :side-offset="5" :align-offset="-3">
                 <MenubarItem v-if="!user" class="h-[30px] gap-5 hidden visible-item mb-5 justify-center">
                   <router-link to="/sign-in" class="font-bold bg-border px-4 py-1
                   rounded-lg hover:opacity-80 hover:cursor-pointer">Sign In
@@ -63,6 +73,12 @@ const user = computed(() => authStore.user)
                       data-[state=checked]:translate-x-[19px]
                       data-[state=unchecked]:bg-accents-6" />
                     </SwitchRoot>
+                  </div>
+                </MenubarItem>
+                <MenubarItem disabled v-if="user">
+                  <div class="flex items-center justify-between">
+                    <button @click="authStore.logout" class="text-foreground font-medium w-full
+                    rounded-lg px-3 py-1 hover:bg-accents-6 disabled:bg-accents-4">Logout</button>
                   </div>
                 </MenubarItem>
               </MenubarContent>
