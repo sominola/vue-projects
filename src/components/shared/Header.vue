@@ -77,6 +77,12 @@ const user = computed(() => authStore.user)
                 </MenubarItem>
                 <MenubarItem disabled v-if="user">
                   <div class="flex items-center justify-between">
+                    <router-link to="/settings" class="text-foreground font-medium w-full
+                    rounded-lg px-3 py-1 hover:bg-accents-6 disabled:bg-accents-4">Settings</router-link>
+                  </div>
+                </MenubarItem>
+                <MenubarItem disabled v-if="user">
+                  <div class="flex items-center justify-between">
                     <button @click="authStore.logout" class="text-foreground font-medium w-full
                     rounded-lg px-3 py-1 hover:bg-accents-6 disabled:bg-accents-4">Logout</button>
                   </div>

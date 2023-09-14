@@ -1,7 +1,6 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import Test from '@/views/auth/Test.vue';
-import type { NavigationGuard } from 'vue-router';
-import { toast } from 'vue-sonner';
+import {createRouter, createWebHistory} from 'vue-router'
+import type {NavigationGuard} from 'vue-router';
+import {toast} from 'vue-sonner';
 
 const HomeView = () => import('@/views/HomeView.vue')
 const SignUpView = () => import('@/views/auth/SignUpView.vue')
@@ -9,6 +8,7 @@ const SignInView = () => import('@/views/auth/SignInView.vue')
 const SettingsView = () => import('@/views/settings/SettingsVue.vue');
 const UserProfileView = () => import('@/views/settings/profile/UserProfileView.vue');
 const ActiveSessionsView = () => import('@/views/settings/active-sessions/ActiveSessionsView.vue');
+const ChatView = () => import('@/views/chat/ChatView.vue');
 
 const authGuard: NavigationGuard = async (to, from, next) => {
     if (localStorage.getItem('access_token'))
@@ -23,8 +23,7 @@ const noAuthGuard: NavigationGuard = async (to, from, next) => {
     if (localStorage.getItem('access_token') == null)
         next();
     else {
-        toast.error('You are already sign in')
-        next('/test');
+        next('/settings');
     }
 };
 
@@ -34,31 +33,27 @@ const router = createRouter({
         {
             path: '/',
             name: 'home',
+            redirect: '/sign-in',
             component: HomeView,
             children: [
                 {
                     path: 'sign-up',
                     name: 'sign-up',
                     component: SignUpView,
-                    meta: { requiresAuth: false }
+                    meta: {requiresAuth: false}
                 },
                 {
                     path: 'sign-in',
                     name: 'sign-in',
                     component: SignInView,
-                    meta: { requiresAuth: false }
-                },
-                {
-                    path: 'test',
-                    name: 'test',
-                    component: Test,
-                    meta: { requiresAuth: true }
+                    meta: {requiresAuth: false}
                 },
                 {
                     path: 'settings',
                     name: 'settings',
                     component: SettingsView,
-                    meta: { requiresAuth: true },
+                    meta: {requiresAuth: true},
+                    redirect: '/settings/profile',
                     children: [
                         {
                             path: 'profile',
@@ -71,9 +66,18 @@ const router = createRouter({
                             component: ActiveSessionsView
                         }
                     ]
+                },
+                {
+                    path: 'chat',
+                    name: 'chat',
+                    component: ChatView
                 }
             ]
         },
+        {
+            path: '/:pathMatch(.*)*',
+            redirect: '/sign-in'
+        }
     ]
 })
 
@@ -82,8 +86,7 @@ router.beforeEach((to, from, next) => {
         authGuard(to, from, next);
     } else if (to.matched.some(record => record.meta.requiresAuth === false)) {
         noAuthGuard(to, from, next);
-    }
-    else {
+    } else {
         next();
     }
 });

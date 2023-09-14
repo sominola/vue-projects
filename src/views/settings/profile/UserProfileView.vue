@@ -17,8 +17,8 @@ const { handleSubmit, meta, resetForm } = useForm<UserUpdateDto>({
 });
 
 
-const onSubmit = handleSubmit(values => {
-    authStore.updateUser(values).then(() => {
+const onSubmit = handleSubmit( async (values)=> {
+   await authStore.updateUser(values).then(() => {
         resetForm();
     });
 });
