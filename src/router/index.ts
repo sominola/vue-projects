@@ -1,5 +1,5 @@
-import {createRouter, createWebHistory} from 'vue-router'
 import type {NavigationGuard} from 'vue-router';
+import {createRouter, createWebHistory} from 'vue-router'
 import {toast} from 'vue-sonner';
 
 const HomeView = () => import('@/views/HomeView.vue')

@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import FormInput from '@/components/form/FormInput.vue';
-import { userUpdateSchema } from '@/helpers/validation-schema/update-user.schema';
-import { useAuthStore } from '@/stores/auth';
-import type { UserUpdateDto } from '@/types/types';
-import { storeToRefs } from 'pinia';
-import { AvatarImage, AvatarRoot } from 'radix-vue';
-import { useForm } from 'vee-validate';
+import {userUpdateSchema} from '@/helpers/validation-schema/update-user.schema';
+import {useAuthStore} from '@/stores/auth';
+import type {UserUpdateDto} from '@/types/types';
+import {storeToRefs} from 'pinia';
+import {AvatarImage, AvatarRoot} from 'radix-vue';
+import {useForm} from 'vee-validate';
 
 const avatarUrl = 'https://images.unsplash.com/photo-1492633423870-43d1cd2775eb?&w=128&h=128&dpr=2&q=80';
 

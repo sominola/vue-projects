@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import MenuLink from "@/components/shared/MenuLink.vue";
-
 </script>
 <template>
     <div>

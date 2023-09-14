@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { checkIfHttpError } from "@/helpers/http.helper";
-import { AuthService } from "@/services/auth.service";
-import { useAuthStore } from "@/stores/auth";
-import type { Paginated, ActiveSessionDto } from "@/types/types";
-import { ref, onMounted } from "vue";
-import { toast } from "vue-sonner";
+import {checkIfHttpError} from "@/helpers/http.helper";
+import {AuthService} from "@/services/auth.service";
+import {useAuthStore} from "@/stores/auth";
+import type {ActiveSessionDto, Paginated} from "@/types/types";
+import {onMounted, ref} from "vue";
+import {toast} from "vue-sonner";
 
 const authStore = useAuthStore();
 const sessions = ref<Paginated<ActiveSessionDto> | null>(null);

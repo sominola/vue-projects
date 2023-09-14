@@ -1,7 +1,7 @@
 import axios from "axios";
-import { AuthService } from "@/services/auth.service"
-import { globalStore } from "@/main";
-import { useAuthStore } from "@/stores/auth";
+import {AuthService} from "@/services/auth.service"
+import {globalStore} from "@/main";
+import {useAuthStore} from "@/stores/auth";
 
 const API_URL = (import.meta as any).env.VITE_API_URL;
 

@@ -1,4 +1,4 @@
-import type { SortDirectionType } from "./paginated";
+import type {SortDirectionType} from "./paginated";
 
 export interface Pagination {
     page?: number;

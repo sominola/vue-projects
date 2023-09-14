@@ -1,4 +1,4 @@
-﻿import { defineStore } from 'pinia'
+﻿import {defineStore} from 'pinia'
 
 const checkIfDarkTheme = () => {
     const theme = localStorage.getItem('theme') ?? 'dark';

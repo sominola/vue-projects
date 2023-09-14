@@ -1,6 +1,15 @@
-import type { ActiveSessionDto, AuthUserDto, Paginated, SignInDto, SignUpDto, TokensDto, UserDto, UserUpdateDto } from "@/types/types";
+import type {
+    ActiveSessionDto,
+    AuthUserDto,
+    Paginated,
+    SignInDto,
+    SignUpDto,
+    TokensDto,
+    UserDto,
+    UserUpdateDto
+} from "@/types/types";
 import $api from "./http-client";
-import type { AxiosPromise } from "axios";
+import type {AxiosPromise} from "axios";
 
 const options = {
     weekday: "short",

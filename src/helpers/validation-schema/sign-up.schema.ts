@@ -1,5 +1,5 @@
-﻿import type { SignUpDto } from "@/types/types";
-import { ObjectSchema, object, string, ref } from "yup";
+﻿import type {SignUpDto} from "@/types/types";
+import {object, ObjectSchema, ref, string} from "yup";
 
 // eslint-disable-next-line no-useless-escape
 const emailRegex = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)

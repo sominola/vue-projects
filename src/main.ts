@@ -1,13 +1,11 @@
 import './assets/main.css'
 
-import { createApp } from 'vue'
-import { createPinia, defineStore } from 'pinia'
+import {createApp} from 'vue'
+import {createPinia} from 'pinia'
 
 import App from './App.vue'
 import router from './router'
-import { useGlobalStore } from "@/stores/global";
-import { useAuthStore } from './stores/auth'
-import { AuthService } from './services/auth.service'
+import {useGlobalStore} from "@/stores/global";
 
 const app = createApp(App)
 app.use(createPinia())

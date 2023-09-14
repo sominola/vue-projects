@@ -1,10 +1,10 @@
 ﻿<script setup lang="ts">
 import FormInput from "@/components/form/FormInput.vue";
-import { useForm } from 'vee-validate';
+import {useForm} from 'vee-validate';
 import ButtonInput from "@/components/form/ButtonInput.vue";
-import { signUpValidation } from "@/helpers/validation-schema/sign-up.schema";
-import type { SignUpDto } from "@/types/types";
-import { useAuthStore } from "@/stores/auth";
+import {signUpValidation} from "@/helpers/validation-schema/sign-up.schema";
+import type {SignUpDto} from "@/types/types";
+import {useAuthStore} from "@/stores/auth";
 
 const { handleSubmit, meta } = useForm<SignUpDto>({
   validationSchema: signUpValidation

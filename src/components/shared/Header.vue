@@ -1,18 +1,20 @@
 ﻿<script setup lang="ts">
 import IconLogo from "@/components/icons/IconLogo.vue";
 import IconProfile from "@/components/icons/IconProfile.vue";
-import { computed, ref, watch } from "vue";
+import {computed, ref, watch} from "vue";
 import {
   MenubarContent,
   MenubarItem,
   MenubarMenu,
   MenubarPortal,
   MenubarRoot,
-  MenubarTrigger, SwitchRoot, SwitchThumb
+  MenubarTrigger,
+  SwitchRoot,
+  SwitchThumb
 } from "radix-vue";
-import { useGlobalStore } from "@/stores/global";
-import { storeToRefs } from "pinia";
-import { useAuthStore } from "@/stores/auth";
+import {useGlobalStore} from "@/stores/global";
+import {storeToRefs} from "pinia";
+import {useAuthStore} from "@/stores/auth";
 
 
 const currentMenu = ref('')
