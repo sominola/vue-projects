@@ -20,7 +20,7 @@ defineProps<{
         <span class="text-sm text-accents-8 font-semibold leading-4 tracking-[0.16px]">{{ chat.name }}</span>
         <span v-if="chat.lastMessage"
               class="text-xs text-accents-6 leading-4 tracking-[0.16px]">
-                      {{ '11:20:00' }}</span>
+                      {{ chat.lastMessage?.createdAt.toLocaleTimeString() }}</span>
       </div>
       <span class="text-accents-6 ">{{ chat.lastMessage?.text }}</span>
     </div>
