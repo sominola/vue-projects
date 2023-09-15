@@ -2,12 +2,12 @@
 import FormInput from "@/components/form/FormInput.vue";
 import {useForm} from 'vee-validate';
 import ButtonInput from "@/components/form/ButtonInput.vue";
-import {signUpValidation} from "@/helpers/validation-schema/sign-up.schema";
-import type {SignUpDto} from "@/types/types";
+import {signUpSchema} from "@/common/helpers/validation-schema/sign-up.schema";
+import type {SignUpDto} from "@/common/types/types";
 import {useAuthStore} from "@/stores/auth";
 
 const { handleSubmit, meta } = useForm<SignUpDto>({
-  validationSchema: signUpValidation
+  validationSchema: signUpSchema
 });
 
 const authStore = useAuthStore();

@@ -1,4 +1,5 @@
-import type {MessageDto, UserDto} from "@/types/types";
+import type {MessageDto, UserDto} from "@/common/types/types";
+import {ChatType} from "@/common/enums/enums";
 
 export type ChatInfoDto = {
     id: string;
@@ -7,8 +8,4 @@ export type ChatInfoDto = {
     avatarUrl: string;
     lastMessage: MessageDto | null;
     members: UserDto[];
-}
-export enum ChatType {
-    Personal = 'Personal',
-    Group = 'Group',
 }

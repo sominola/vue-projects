@@ -1,8 +1,8 @@
 import {defineStore} from 'pinia'
-import type {SignInDto, SignUpDto, UserDto, UserUpdateDto} from "@/types/types";
+import type {SignInDto, SignUpDto, UserDto, UserUpdateDto} from "@/common/types/types";
 import {AuthService} from "@/services/auth.service";
 import {toast} from "vue-sonner";
-import {checkIfHttpError} from "@/helpers/http.helper";
+import {checkIfHttpError} from "@/common/helpers/http.helper";
 import type {AxiosResponse} from 'axios';
 import router from '@/router';
 

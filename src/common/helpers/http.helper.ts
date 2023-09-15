@@ -1,5 +1,5 @@
 ﻿import {AxiosError, type AxiosResponse} from "axios";
-import {type Error} from "@/types/types";
+import {type Error} from "@/common/types/types";
 
 export const checkIfHttpError = (response: AxiosResponse): [boolean, Error | null] => {
     const isError = response instanceof AxiosError;

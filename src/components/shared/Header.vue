@@ -20,13 +20,12 @@ import {useAuthStore} from "@/stores/auth";
 const currentMenu = ref('')
 const globalStore = useGlobalStore();
 const authStore = useAuthStore();
-const { isDarkTheme } = storeToRefs(globalStore);
+const {isDarkTheme} = storeToRefs(globalStore);
 watch(isDarkTheme, () => {
   if (isDarkTheme.value) {
     localStorage.setItem('theme', 'dark');
     document.documentElement.setAttribute('data-theme', 'dark');
-  }
-  else {
+  } else {
     localStorage.setItem('theme', 'light');
     document.documentElement.setAttribute('data-theme', 'light');
   }
@@ -36,10 +35,10 @@ const user = computed(() => authStore.user)
 </script>
 <template>
   <div class="px-3 py-2 flex flex-row gap-5 justify-between items-center h-header">
-    <div class="flex flex-row gap-5 items-center hover:opacity-80 hover:cursor-pointer">
-      <IconLogo />
+    <router-link to="/chat" class="flex flex-row gap-5 items-center hover:opacity-80 hover:cursor-pointer">
+      <IconLogo/>
       <span class="font-bold text-xl text-foreground">Sociality</span>
-    </div>
+    </router-link>
     <div class="flex gap-5 flex-row">
       <router-link v-if="!user" to="/sign-in" class="hidden-item font-bold bg-border px-4 py-1 rounded-lg
       hover:opacity-80 hover:cursor-pointer">Sign In
@@ -51,11 +50,11 @@ const user = computed(() => authStore.user)
         <MenubarRoot v-model="currentMenu">
           <MenubarMenu value="file">
             <MenubarTrigger class="hover cursor-pointer hover:bg-accents-2 rounded-lg p-[3px]">
-              <IconProfile />
+              <IconProfile/>
             </MenubarTrigger>
             <MenubarPortal>
               <MenubarContent class="flex flex-col gap-5 min-w-[220px] bg-accents-1 p-3 shadow-xl rounded-lg"
-                align="start" :side-offset="5" :align-offset="-3">
+                              align="start" :side-offset="5" :align-offset="-3">
                 <MenubarItem v-if="!user" class="h-[30px] gap-5 hidden visible-item mb-5 justify-center">
                   <router-link to="/sign-in" class="font-bold bg-border px-4 py-1
                   rounded-lg hover:opacity-80 hover:cursor-pointer">Sign In
@@ -73,20 +72,22 @@ const user = computed(() => authStore.user)
                       <SwitchThumb class="w-[11px] h-[11px] my-auto bg-violet rounded-full
                       transition-transform duration-200 translate-x-0.5 will-change-transform 
                       data-[state=checked]:translate-x-[19px]
-                      data-[state=unchecked]:bg-accents-6" />
+                      data-[state=unchecked]:bg-accents-6"/>
                     </SwitchRoot>
                   </div>
                 </MenubarItem>
                 <MenubarItem disabled v-if="user">
                   <div class="flex items-center justify-between">
                     <router-link to="/settings" class="text-foreground font-medium w-full
-                    rounded-lg px-3 py-1 hover:bg-accents-6 disabled:bg-accents-4">Settings</router-link>
+                    rounded-lg px-3 py-1 hover:bg-accents-6 disabled:bg-accents-4">Settings
+                    </router-link>
                   </div>
                 </MenubarItem>
                 <MenubarItem disabled v-if="user">
                   <div class="flex items-center justify-between">
                     <button @click="authStore.logout" class="text-foreground font-medium w-full
-                    rounded-lg px-3 py-1 hover:bg-accents-6 disabled:bg-accents-4">Logout</button>
+                    rounded-lg px-3 py-1 hover:bg-accents-6 disabled:bg-accents-4">Logout
+                    </button>
                   </div>
                 </MenubarItem>
               </MenubarContent>

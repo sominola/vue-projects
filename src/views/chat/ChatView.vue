@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import {AvatarImage, AvatarRoot} from "radix-vue";
-import type {ChatInfoDto} from "@/types/chat/chat-info.dto";
-import {ChatType} from "@/types/chat/chat-info.dto";
-import {onMounted, ref} from "vue";
+import type {ChatInfoDto} from "@/common/types/chat/chat";
+import {ref} from "vue";
+import ChatItem from "@/views/chat/components/ChatItem.vue";
+import {ChatType} from "@/common/enums/enums";
 
 const avatarUrl = 'https://images.unsplash.com/photo-1492633423870-43d1cd2775eb?&w=128&h=128&dpr=2&q=80';
 const chatInit: ChatInfoDto[] = [
@@ -38,37 +38,11 @@ const chatInit: ChatInfoDto[] = [
   }
 ]
 const chats = ref(chatInit)
-onMounted(() => {
-  for (let i = 0; i < 50; i++) {
-    chats.value.push(chats.value[0])
-  }
-})
 </script>
 <template>
-  <div class="content">
-    <div class="w-[300px] content overflow-y-auto">
-      <div v-for="chat in chats" :key="chat.id" class="bg-accents-1 flex justify-between h-[75px] items-center p-3">
-        <AvatarRoot
-            class="h-[60px] w-[60px] select-none items-center justify-center overflow-hidden rounded-full align-middle">
-          <AvatarImage class="h-full w-full rounded-[inherit] object-cover" :src="avatarUrl" alt="Avatar"/>
-        </AvatarRoot>
-        <div class="flex flex-col w-[200px] gap-2">
-          <div class="flex justify-between w-full">
-            <span class="text-sm text-accents-8 font-semibold leading-4 tracking-[0.16px]">{{ chat.name }}</span>
-            <span v-if="chat.lastMessage"
-                  class="text-xs text-accents-6 leading-4 tracking-[0.16px]">
-                      {{ chat.lastMessage?.createdAt.toLocaleTimeString() }}</span>
-          </div>
-          <span class="text-accents-6 ">{{ chat.lastMessage?.text }}</span>
-        </div>
-      </div>
+  <div class="h-content">
+    <div class="w-[300px] h-content overflow-y-auto">
+      <ChatItem v-for="chat in chats" :chat="chat" :key="chat.id" :is-active="chat.isActive"/>
     </div>
   </div>
 </template>
-<style>
-.content {
-  max-height: calc(100vh - var(--header-height));
-  height: 100%;
-  overflow-y: auto;
-}
-</style>

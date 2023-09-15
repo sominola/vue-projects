@@ -7,7 +7,7 @@ import type {
     TokensDto,
     UserDto,
     UserUpdateDto
-} from "@/types/types";
+} from "@/common/types/types";
 import $api from "./http-client";
 import type {AxiosPromise} from "axios";
 

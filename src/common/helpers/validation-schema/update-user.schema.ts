@@ -1,4 +1,4 @@
-import type {UserUpdateDto} from "@/types/types";
+import type {UserUpdateDto} from "@/common/types/types";
 import {object, ObjectSchema, string} from "yup";
 
 export const userUpdateSchema: ObjectSchema<UserUpdateDto> = object({
