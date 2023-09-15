@@ -1,4 +1,4 @@
-import type {UserDto} from "@/types/types";
+import type {MessageDto, UserDto} from "@/types/types";
 
 export type ChatInfoDto = {
     id: string;

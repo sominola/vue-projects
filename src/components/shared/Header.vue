@@ -35,7 +35,7 @@ const user = computed(() => authStore.user)
 
 </script>
 <template>
-  <div class="h-14 px-3 py-2 flex flex-row gap-5 justify-between items-center">
+  <div class="px-3 py-2 flex flex-row gap-5 justify-between items-center h-header">
     <div class="flex flex-row gap-5 items-center hover:opacity-80 hover:cursor-pointer">
       <IconLogo />
       <span class="font-bold text-xl text-foreground">Sociality</span>
