@@ -47,10 +47,12 @@ const { value, errorMessage, meta } = useField(() => props.name);
   border-color: var(--violetLight);
 }
 
+/*noinspection CssUnusedSymbol*/
 .bounce-enter-active {
   animation: bounce-in 0.5s;
 }
 
+/*noinspection CssUnusedSymbol*/
 .bounce-leave-active {
   animation: bounce-in 0.5s reverse;
 }
