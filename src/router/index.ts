@@ -1,6 +1,6 @@
-import type { NavigationGuard } from 'vue-router';
-import { createRouter, createWebHistory } from 'vue-router'
-import { toast } from 'vue-sonner';
+import type {NavigationGuard} from 'vue-router';
+import {createRouter, createWebHistory} from 'vue-router'
+import {toast} from 'vue-sonner';
 
 const HomeView = () => import('@/views/HomeView.vue')
 const SignUpView = () => import('@/views/auth/SignUpView.vue')

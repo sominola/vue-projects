@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import ChatItem from "@/views/chat/components/ChatItem.vue";
-import { useUsersStore } from "@/stores/stores";
-import { onBeforeMount, onMounted, ref } from "vue";
-import type { ChatDto } from "@/common/types/chat/chat.dto";
-import { ChatService, signlaR } from "@/services/services";
+import { useAuthStore, useUsersStore } from "@/stores/stores";
+import { onBeforeMount, ref } from "vue";
+import type { ChatDto } from "@/common/types/types";
+import { ChatService } from "@/services/services";
 
 type ChatDtoExtended = ChatDto & { isActive: false }
 function getUniqueMemberIds(chatArray: ChatDto[]): number[] {
@@ -19,12 +19,13 @@ function getUniqueMemberIds(chatArray: ChatDto[]): number[] {
 }
 
 const usersStore = useUsersStore()
+const authStore = useAuthStore()
 const chats = ref<ChatDtoExtended[]>([]);
 
 onBeforeMount(async () => {
   const newChats = (await ChatService.getChats()).data.items as ChatDtoExtended[];
   newChats.forEach(x => x.isActive = false);
-  const uniqueMemberIds = getUniqueMemberIds(newChats);
+  const uniqueMemberIds = getUniqueMemberIds(newChats).filter(x => x != authStore.user?.id);
   usersStore.addUsers(uniqueMemberIds);
   chats.value.push(...newChats)
 })

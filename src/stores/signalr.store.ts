@@ -1,6 +1,6 @@
-import type { MessageDto, UserDto } from '@/common/types/types';
-import type { HubConnection } from '@microsoft/signalr';
-import { defineStore } from 'pinia'
+import type {MessageDto, UserDto} from '@/common/types/types';
+import type {HubConnection} from '@microsoft/signalr';
+import {defineStore} from 'pinia'
 
 type SignalrStateStore = {
     lastMessage: MessageDto | null;

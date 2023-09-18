@@ -1,6 +1,6 @@
-import type { UserDto } from "@/common/types/types";
-import type { AxiosPromise } from "axios";
-import { HttpClientService } from "@/services/services";
+import type {UserDto} from "@/common/types/types";
+import type {AxiosPromise} from "axios";
+import {HttpClientService} from "@/services/services";
 
 export class UserService {
 

@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import type { MessageDto, UserDto } from '@/common/types/types';
 import { signlaR } from '@/services/signalr.service';
-import { useSignalrStore } from '@/stores/signalr.store';
-import { useAuthStore } from '@/stores/stores';
-import { useUsersStore } from '@/stores/users.store';
+import { useSignalrStore, useUsersStore, useAuthStore } from '@/stores/stores';
 import { computed, watch } from 'vue';
 
 

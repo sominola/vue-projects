@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { ChatType } from "@/common/enums/chat-type.enum";
-import type { ChatDto, UserDto } from "@/common/types/types";
-import { useAuthStore, useUsersStore } from "@/stores/stores";
-import { AvatarImage, AvatarRoot } from "radix-vue";
-import { computed, onMounted, ref } from "vue";
+import {ChatType} from "@/common/enums/chat-type.enum";
+import type {ChatDto} from "@/common/types/types";
+import {useAuthStore, useUsersStore} from "@/stores/stores";
+import {AvatarImage, AvatarRoot} from "radix-vue";
+import {computed} from "vue";
+
 const avatarUrl = 'https://images.unsplash.com/photo-1492633423870-43d1cd2775eb?&w=128&h=128&dpr=2&q=80';
 
 const props = defineProps<{

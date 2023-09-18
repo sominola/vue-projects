@@ -1,8 +1,8 @@
 import axios from "axios";
-import { AuthService } from "@/services/auth.service"
-import { globalStore } from "@/main";
-import { useAuthStore } from "@/stores/auth.store";
-import { toast } from "vue-sonner";
+import {AuthService} from "@/services/auth.service"
+import {globalStore} from "@/main";
+import {useAuthStore} from "@/stores/auth.store";
+import {toast} from "vue-sonner";
 
 const API_URL = (import.meta as any).env.VITE_API_URL;
 

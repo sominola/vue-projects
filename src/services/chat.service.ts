@@ -1,7 +1,8 @@
 import type {
     AddMembersRequest,
     ChatDto,
-    CreateChatRequest, MessageDto,
+    CreateChatRequest,
+    MessageDto,
     MessageRequest,
     Paginated,
     Pagination

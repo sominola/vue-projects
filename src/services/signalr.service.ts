@@ -1,5 +1,5 @@
-import type { UserDto } from "@/common/types/types";
-import type { HubConnection } from "@microsoft/signalr";
+import type {UserDto} from "@/common/types/types";
+import type {HubConnection} from "@microsoft/signalr";
 import * as signalR from "@microsoft/signalr";
 
 class SignalrService {

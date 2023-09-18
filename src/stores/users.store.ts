@@ -1,7 +1,6 @@
-import { defineStore } from "pinia";
-import { type UserDto } from "@/common/types/types";
-import { UserService } from "@/services/user.service";
-import { signlaR } from "@/services/services";
+import {defineStore} from "pinia";
+import {type UserDto} from "@/common/types/types";
+import {signlaR} from "@/services/services";
 
 type UsersStoreState = {
     users: UserDto[];
