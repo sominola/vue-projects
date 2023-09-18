@@ -1,4 +1,3 @@
-export {type ChatInfoDto} from './chat-info.dto';
 export {type MessageDto} from './message.dto';
 export {type ChatDto} from './chat.dto';
 export {type MessageRequest} from './requests/message.request';

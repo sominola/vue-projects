@@ -3,7 +3,7 @@ import FormInput from "@/components/form/FormInput.vue";
 import {useForm} from 'vee-validate';
 import ButtonInput from "@/components/form/ButtonInput.vue";
 import {signInSchema} from "@/common/helpers/validation-schema/sign-in.schema";
-import {useAuthStore} from "@/stores/auth";
+import {useAuthStore} from "@/stores/auth.store";
 import type {SignInDto} from "@/common/types/types";
 
 const { handleSubmit, meta } = useForm<SignInDto>({

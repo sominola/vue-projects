@@ -12,9 +12,9 @@ import {
   SwitchRoot,
   SwitchThumb
 } from "radix-vue";
-import {useGlobalStore} from "@/stores/global";
+import {useGlobalStore} from "@/stores/global.store";
 import {storeToRefs} from "pinia";
-import {useAuthStore} from "@/stores/auth";
+import {useAuthStore} from "@/stores/auth.store";
 
 
 const currentMenu = ref('')

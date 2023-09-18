@@ -8,8 +8,8 @@ import type {
     UserDto,
     UserUpdateDto
 } from "@/common/types/types";
-import $api from "./http-client";
 import type {AxiosPromise} from "axios";
+import {HttpClientService as http} from "@/services/services"
 
 const options = {
     weekday: "short",
@@ -31,31 +31,31 @@ const formatDate = (date: Date | string): string => {
 export class AuthService {
 
     static async signIn(auth: SignInDto): AxiosPromise<AuthUserDto> {
-        return await $api.post<AuthUserDto>('/auth/login', auth);
+        return await http.post<AuthUserDto>('/auth/login', auth);
     }
 
     static async signUp(auth: SignUpDto): AxiosPromise<AuthUserDto> {
-        return await $api.post<AuthUserDto>('/auth/register', auth);
+        return await http.post<AuthUserDto>('/auth/register', auth);
     }
 
     static async logout(refreshToken: string): AxiosPromise<void> {
-        return await $api.post<void>('/auth/revoke', { refreshToken: refreshToken });
+        return await http.post<void>('/auth/revoke', { refreshToken: refreshToken });
     }
 
     static async refreshToken(tokens: TokensDto): AxiosPromise<TokensDto> {
-        return await $api.post<TokensDto>('/auth/refresh', tokens);
+        return await http.post<TokensDto>('/auth/refresh', tokens);
     }
 
     static async getCurrentUser(): AxiosPromise<UserDto> {
-        return await $api.get<UserDto>('/auth/current');
+        return await http.get<UserDto>('/auth/current');
     }
 
     static async updateUser(user: UserUpdateDto): AxiosPromise<UserDto> {
-        return await $api.put<UserDto>('/auth/current', user);
+        return await http.put<UserDto>('/auth/current', user);
     }
 
     static async getActiveSessions(): AxiosPromise<Paginated<ActiveSessionDto>> {
-        return await $api.get<Paginated<ActiveSessionDto>>('/auth/sessions')
+        return await http.get<Paginated<ActiveSessionDto>>('/auth/sessions')
             .then(response => {
                 response.data.items.forEach(session => {
                     session.lastActiveAt = formatDate(session.lastActiveAt)

@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import type {ChatInfoDto} from "@/common/types/types";
+import type {ChatDto} from "@/common/types/types";
 import {AvatarImage, AvatarRoot} from "radix-vue";
 
 defineProps<{
-  chat: ChatInfoDto,
+  chat: ChatDto,
   isActive?: boolean
 }>();
 </script>

@@ -1,9 +1,10 @@
-import type {UserDto} from "@/common/types/types";
+import type {MessageDto} from "@/common/types/chat/message.dto";
 
 export type ChatDto ={
     id: string;
     type: string;
     name: string;
-    avatar: string;
-    members: UserDto[];
+    avatarUrl: string;
+    lastMessage?: MessageDto | null;
+    memberIds: number[];
 }

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Header from "@/components/shared/Header.vue";
 import {AuthService} from "@/services/auth.service";
-import {useAuthStore} from "@/stores/auth";
+import {useAuthStore} from "@/stores/auth.store";
 import {onMounted} from "vue";
 
 onMounted(async () => {

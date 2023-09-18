@@ -5,7 +5,7 @@ import {createPinia} from 'pinia'
 
 import App from './App.vue'
 import router from './router'
-import {useGlobalStore} from "@/stores/global";
+import {useGlobalStore} from "@/stores/global.store";
 
 const app = createApp(App)
 app.use(createPinia())

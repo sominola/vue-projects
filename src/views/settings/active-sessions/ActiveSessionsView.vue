@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {checkIfHttpError} from "@/common/helpers/http.helper";
 import {AuthService} from "@/services/auth.service";
-import {useAuthStore} from "@/stores/auth";
+import {useAuthStore} from "@/stores/auth.store";
 import type {ActiveSessionDto, Paginated} from "@/common/types/types";
 import {onMounted, ref} from "vue";
 import {toast} from "vue-sonner";

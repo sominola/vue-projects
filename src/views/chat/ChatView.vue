@@ -1,43 +1,26 @@
 <script setup lang="ts">
-import type {ChatInfoDto} from "@/common/types/chat/chat";
-import {ref} from "vue";
 import ChatItem from "@/views/chat/components/ChatItem.vue";
-import {ChatType} from "@/common/enums/enums";
+import {useUsersStore} from "@/stores/stores";
+import {storeToRefs} from "pinia";
+import {onMounted, ref} from "vue";
+import type {ChatDto} from "@/common/types/chat/chat.dto";
+import {ChatService} from "@/services/services";
+import type {UserDto} from "@/common/types/user/user.dto";
 
-const avatarUrl = 'https://images.unsplash.com/photo-1492633423870-43d1cd2775eb?&w=128&h=128&dpr=2&q=80';
-const chatInit: ChatInfoDto[] = [
-  {
-    id: '1',
-    type: ChatType.Personal,
-    name: 'Nikita Savchuk',
-    avatarUrl: avatarUrl,
-    members: [
-      {
-        id: 1,
-        fullName: 'Nikita Savchuk',
-        email: 'sominola@gmail.com',
-        avatarUrl: avatarUrl,
-        firstName: 'Nikita',
-        lastName: 'Savchuk',
-      }
-    ],
-    lastMessage: {
-      id: 'test',
-      chatId: '1',
-      text: 'Hi, how are you?',
-      createdAt: new Date(),
-      sender: {
-        id: 1,
-        fullName: 'Nikita Savchuk',
-        email: 'sominola@gmail.com',
-        avatarUrl: avatarUrl,
-        firstName: 'Nikita',
-        lastName: 'Savchuk',
-      }
-    }
-  }
-]
-const chats = ref(chatInit)
+type ChatDtoExtended = ChatDto & { isActive: false, members: UserDto[] }
+const usersStore = useUsersStore()
+const {getUsers} = storeToRefs(usersStore)
+
+
+const chats = ref<ChatDtoExtended[]>([]);
+onMounted(async () => {
+  const newChats = (await ChatService.getChats()).data.items as ChatDto[];
+  const uniqueMemberIds = [...new Set(newChats.flatMap(chat => chat.memberIds))];
+  const members = getUsers.value;
+  console.log(members)
+  
+})
+
 </script>
 <template>
   <div class="h-content">

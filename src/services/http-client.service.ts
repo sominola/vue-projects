@@ -1,11 +1,12 @@
 import axios from "axios";
 import {AuthService} from "@/services/auth.service"
 import {globalStore} from "@/main";
-import {useAuthStore} from "@/stores/auth";
+import {useAuthStore} from "@/stores/auth.store";
+import {toast} from "vue-sonner";
 
 const API_URL = (import.meta as any).env.VITE_API_URL;
 
-const $api = axios.create({
+export const HttpClientService = axios.create({
     withCredentials: true,
     baseURL: API_URL
 })
@@ -18,7 +19,7 @@ const requestFinished = () => {
 }
 
 
-$api.interceptors.request.use(async (config) => {
+HttpClientService.interceptors.request.use(async (config) => {
     globalStore.start();
     countPending++;
 
@@ -48,11 +49,11 @@ async function refreshAccessToken() {
     return newToken;
 }
 
-$api.interceptors.response.use(config => {
+HttpClientService.interceptors.response.use(config => {
     requestFinished()
     return config;
 }, async (error) => {
-    const originalRequest = error.config;
+    console.log(error)
     if (error.response?.status === 401 && !originalRequest._retry && AuthService.hasAccessToken()) {
         originalRequest._retry = true;
         return refreshAccessToken().then(accessToken => {
@@ -64,10 +65,10 @@ $api.interceptors.response.use(config => {
             localStorage.remove('refresh_token');
             requestFinished();
         })
+    } else if(error.code === 'ERR_NETWORK'){
+        toast.error('No internet connection')
     }
+
     requestFinished();
     return error;
 })
-
-
-export default $api;

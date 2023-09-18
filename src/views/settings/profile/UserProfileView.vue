@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import FormInput from '@/components/form/FormInput.vue';
 import {userUpdateSchema} from '@/common/helpers/validation-schema/update-user.schema';
-import {useAuthStore} from '@/stores/auth';
+import {useAuthStore} from '@/stores/auth.store';
 import type {UserUpdateDto} from '@/common/types/types';
 import {storeToRefs} from 'pinia';
 import {AvatarImage, AvatarRoot} from 'radix-vue';

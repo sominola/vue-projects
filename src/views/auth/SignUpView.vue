@@ -4,7 +4,7 @@ import {useForm} from 'vee-validate';
 import ButtonInput from "@/components/form/ButtonInput.vue";
 import {signUpSchema} from "@/common/helpers/validation-schema/sign-up.schema";
 import type {SignUpDto} from "@/common/types/types";
-import {useAuthStore} from "@/stores/auth";
+import {useAuthStore} from "@/stores/auth.store";
 
 const { handleSubmit, meta } = useForm<SignUpDto>({
   validationSchema: signUpSchema
