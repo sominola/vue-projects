@@ -1,8 +1,9 @@
-import type {MessageDto} from "@/common/types/chat/message.dto";
+import type { ChatType } from "@/common/enums/enums";
+import type { MessageDto } from "@/common/types/chat/message.dto";
 
-export type ChatDto ={
+export type ChatDto = {
     id: string;
-    type: string;
+    type: ChatType;
     name: string;
     avatarUrl: string;
     lastMessage?: MessageDto | null;

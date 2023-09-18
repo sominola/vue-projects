@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import Header from "@/components/shared/Header.vue";
-import {AuthService} from "@/services/auth.service";
-import {useAuthStore} from "@/stores/auth.store";
-import {onMounted} from "vue";
+import { AuthService } from "@/services/auth.service";
+import { useAuthStore } from "@/stores/stores";
+import { onMounted } from "vue";
+
 
 onMounted(async () => {
   if (localStorage.getItem('access_token')) {
@@ -16,6 +17,8 @@ onMounted(async () => {
     }
   }
 })
+
+
 </script>
 
 <template>

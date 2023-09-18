@@ -1,8 +1,8 @@
 import axios from "axios";
-import {AuthService} from "@/services/auth.service"
-import {globalStore} from "@/main";
-import {useAuthStore} from "@/stores/auth.store";
-import {toast} from "vue-sonner";
+import { AuthService } from "@/services/auth.service"
+import { globalStore } from "@/main";
+import { useAuthStore } from "@/stores/auth.store";
+import { toast } from "vue-sonner";
 
 const API_URL = (import.meta as any).env.VITE_API_URL;
 
@@ -54,6 +54,7 @@ HttpClientService.interceptors.response.use(config => {
     return config;
 }, async (error) => {
     console.log(error)
+    const originalRequest = error.config;
     if (error.response?.status === 401 && !originalRequest._retry && AuthService.hasAccessToken()) {
         originalRequest._retry = true;
         return refreshAccessToken().then(accessToken => {
@@ -65,7 +66,7 @@ HttpClientService.interceptors.response.use(config => {
             localStorage.remove('refresh_token');
             requestFinished();
         })
-    } else if(error.code === 'ERR_NETWORK'){
+    } else if (error.code === 'ERR_NETWORK') {
         toast.error('No internet connection')
     }
 

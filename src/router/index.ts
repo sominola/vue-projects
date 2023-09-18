@@ -1,6 +1,6 @@
-import type {NavigationGuard} from 'vue-router';
-import {createRouter, createWebHistory} from 'vue-router'
-import {toast} from 'vue-sonner';
+import type { NavigationGuard } from 'vue-router';
+import { createRouter, createWebHistory } from 'vue-router'
+import { toast } from 'vue-sonner';
 
 const HomeView = () => import('@/views/HomeView.vue')
 const SignUpView = () => import('@/views/auth/SignUpView.vue')
@@ -9,6 +9,7 @@ const SettingsView = () => import('@/views/settings/SettingsVue.vue');
 const UserProfileView = () => import('@/views/settings/profile/UserProfileView.vue');
 const ActiveSessionsView = () => import('@/views/settings/active-sessions/ActiveSessionsView.vue');
 const ChatView = () => import('@/views/chat/ChatView.vue');
+const AuthedView = () => import('@/views/AuthedView.vue');
 
 const authGuard: NavigationGuard = async (to, from, next) => {
     if (localStorage.getItem('access_token'))
@@ -37,41 +38,48 @@ const router = createRouter({
             component: HomeView,
             children: [
                 {
+                    path: '',
+                    name: 'authed',
+                    component: AuthedView,
+                    meta: { requiredAuth: true },
+                    children: [
+                        {
+                            path: 'settings',
+                            name: 'settings',
+                            component: SettingsView,
+                            redirect: '/settings/profile',
+                            children: [
+                                {
+                                    path: 'profile',
+                                    name: 'profile',
+                                    component: UserProfileView
+                                },
+                                {
+                                    path: 'sessions',
+                                    name: 'sessions',
+                                    component: ActiveSessionsView
+                                }
+                            ]
+                        },
+                        {
+                            path: 'chat',
+                            name: 'chat',
+                            component: ChatView
+                        }
+                    ]
+                },
+                {
                     path: 'sign-up',
                     name: 'sign-up',
                     component: SignUpView,
-                    meta: {requiresAuth: false}
+                    meta: { requiresAuth: false }
                 },
                 {
                     path: 'sign-in',
                     name: 'sign-in',
                     component: SignInView,
-                    meta: {requiresAuth: false}
+                    meta: { requiresAuth: false }
                 },
-                {
-                    path: 'settings',
-                    name: 'settings',
-                    component: SettingsView,
-                    meta: {requiresAuth: true},
-                    redirect: '/settings/profile',
-                    children: [
-                        {
-                            path: 'profile',
-                            name: 'profile',
-                            component: UserProfileView
-                        },
-                        {
-                            path: 'sessions',
-                            name: 'sessions',
-                            component: ActiveSessionsView
-                        }
-                    ]
-                },
-                {
-                    path: 'chat',
-                    name: 'chat',
-                    component: ChatView
-                }
             ]
         },
         {
