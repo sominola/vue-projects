@@ -10,6 +10,7 @@ const UserProfileView = () => import('@/views/settings/profile/UserProfileView.v
 const ActiveSessionsView = () => import('@/views/settings/active-sessions/ActiveSessionsView.vue');
 const ChatView = () => import('@/views/chat/ChatView.vue');
 const AuthedView = () => import('@/views/AuthedView.vue');
+const SelectedChatView = () => import('@/views/chat/SelectedChatView.vue');
 
 const authGuard: NavigationGuard = async (to, from, next) => {
     if (localStorage.getItem('access_token'))
@@ -62,9 +63,9 @@ const router = createRouter({
                             ]
                         },
                         {
-                            path: 'chat',
+                            path: 'chat/:id?',
                             name: 'chat',
-                            component: ChatView
+                            component: ChatView,
                         }
                     ]
                 },

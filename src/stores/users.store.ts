@@ -1,6 +1,6 @@
 import {defineStore} from "pinia";
 import {type UserDto} from "@/common/types/types";
-import {signlaR} from "@/services/services";
+import {signalR} from "@/services/services";
 
 type UsersStoreState = {
     users: UserDto[];
@@ -26,7 +26,7 @@ export const useUsersStore = defineStore('users', {
             }
 
             if (notExistsUserIds.length > 0) {
-                const users = await signlaR.getUsers(notExistsUserIds);
+                const users = await signalR.getUsers(notExistsUserIds);
                 if (users) {
                     for (const newUser of users) {
                         this.users.push(newUser);

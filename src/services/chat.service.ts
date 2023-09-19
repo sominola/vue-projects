@@ -24,6 +24,15 @@ export class ChatService {
             })
     }
 
+    static async getChat(chatId: string): AxiosPromise<ChatDto> {
+        return await HttpClientService.get<ChatDto>(`/chat/${chatId}`)
+            .then(response => {
+                if (response.data?.lastMessage?.createdAt)
+                    response.data.lastMessage.createdAt = new Date(response.data.lastMessage.createdAt);
+                return response;
+            });
+    }
+
     static async sendMessage(message: MessageRequest): AxiosPromise {
         return await HttpClientService.post(`/chat/message`, message);
     }

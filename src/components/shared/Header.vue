@@ -1,8 +1,9 @@
 ﻿<script setup lang="ts">
 import IconLogo from "@/components/icons/IconLogo.vue";
-import IconProfile from "@/components/icons/IconProfile.vue";
 import {computed, ref, watch} from "vue";
 import {
+  AvatarFallback,
+  AvatarImage, AvatarRoot,
   MenubarContent,
   MenubarItem,
   MenubarMenu,
@@ -34,7 +35,7 @@ const user = computed(() => authStore.user)
 
 </script>
 <template>
-  <div class="px-3 py-2 flex flex-row gap-5 justify-between items-center h-header">
+  <div class="px-3 py-2 flex flex-row gap-5 justify-between items-center h-header border-b-2 border-t-2 border-solid border-accents-2">
     <router-link to="/chat" class="flex flex-row gap-5 items-center hover:opacity-80 hover:cursor-pointer">
       <IconLogo/>
       <span class="font-bold text-xl text-foreground">Sociality</span>
@@ -47,10 +48,14 @@ const user = computed(() => authStore.user)
       hover:opacity-80 hover:cursor-pointer">Sign Up
       </router-link>
       <div>
-        <MenubarRoot v-model="currentMenu">
+        <MenubarRoot v-model="currentMenu" v-if="user">
           <MenubarMenu value="file">
             <MenubarTrigger class="hover cursor-pointer hover:bg-accents-2 rounded-lg p-[3px]">
-              <IconProfile/>
+              <AvatarRoot class="bg-blackA3 inline-flex h-[45px] w-[45px] select-none items-center justify-center overflow-hidden rounded-full align-middle">
+                <AvatarFallback class="leading-1 flex h-full w-full items-center justify-center bg-accents-3 text-[15px] font-medium">
+                  {{user.firstName[0] }}{{user.lastName[0]}}
+                </AvatarFallback>
+              </AvatarRoot>
             </MenubarTrigger>
             <MenubarPortal>
               <MenubarContent class="flex flex-col gap-5 min-w-[220px] bg-accents-1 p-3 shadow-xl rounded-lg"

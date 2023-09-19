@@ -4,8 +4,9 @@ import {userUpdateSchema} from '@/common/helpers/validation-schema/update-user.s
 import {useAuthStore} from '@/stores/auth.store';
 import type {UserUpdateDto} from '@/common/types/types';
 import {storeToRefs} from 'pinia';
-import {AvatarImage, AvatarRoot} from 'radix-vue';
+import {AvatarFallback, AvatarImage, AvatarRoot} from 'radix-vue';
 import {useForm} from 'vee-validate';
+import {ChatType} from "@/common/enums/chat-type.enum";
 
 const avatarUrl = 'https://images.unsplash.com/photo-1492633423870-43d1cd2775eb?&w=128&h=128&dpr=2&q=80';
 
@@ -34,13 +35,19 @@ const onSubmit = handleSubmit( async (values)=> {
                     <span> Click on the avatar to upload a custom one from your files.</span>
                 </div>
             </div>
-            <AvatarRoot class="bg-blackA3 inline-flex h-[75px] w-[75px] 
+            <AvatarRoot v-if="user?.avatarUrl" class="bg-blackA3 inline-flex h-[75px] w-[75px] 
             select-none items-center justify-center overflow-hidden rounded-full align-middle
             hover:opacity-70 hover:cursor-pointer">
                 <AvatarImage class="h-full w-full rounded-[inherit] object-cover" :src="avatarUrl" alt="Avatar" />
             </AvatarRoot>
+          <AvatarRoot v-else class="bbg-blackA3 inline-flex h-[75px] w-[75px] 
+            select-none items-center justify-center overflow-hidden rounded-full align-middle
+            hover:opacity-70 hover:cursor-pointer">
+            <AvatarFallback class="leading-1 flex h-full w-full items-center justify-center bg-accents-3 text-[15px] font-medium">
+              {{user.firstName[0] }}{{user.lastName[0]}}
+            </AvatarFallback>
+          </AvatarRoot>
         </div>
-
 
         <div class="flex flex-col gap-5 p-5 rounded-lg bg-accents-1">
             <span class="tracking-tight text-xl font-semibold text-accents-7">Your Email</span>

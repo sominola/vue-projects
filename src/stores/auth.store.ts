@@ -5,6 +5,8 @@ import {toast} from "vue-sonner";
 import {checkIfHttpError} from "@/common/helpers/http.helper";
 import type {AxiosResponse} from 'axios';
 import router from '@/router';
+import {signalR} from "@/services/signalr.service";
+import {useSignalrStore} from "@/stores/stores";
 
 export const useAuthStore = defineStore('auth', {
     state: () => ({ user: null as UserDto | null }),
@@ -51,6 +53,11 @@ export const useAuthStore = defineStore('auth', {
             this.user = null;
             localStorage.removeItem('access_token');
             localStorage.removeItem('refresh_token');
+            await signalR.stop();
+            
+            const signalRStore = useSignalrStore()
+            signalRStore.hubConnection = null;
+            
             router.push('/sign-in');
         },
 

@@ -15,12 +15,15 @@ let countPending = 0;
 const requestFinished = () => {
     countPending--;
     if (countPending === 0)
-        globalStore.finish();
+        // globalStore.finish();
+        globalStore.loading = false;
+        
 }
 
 
 HttpClientService.interceptors.request.use(async (config) => {
-    globalStore.start();
+    // globalStore.start();
+    globalStore.loading = true;
     countPending++;
 
     const accessToken = localStorage.getItem('access_token');
@@ -53,7 +56,6 @@ HttpClientService.interceptors.response.use(config => {
     requestFinished()
     return config;
 }, async (error) => {
-    console.log(error)
     const originalRequest = error.config;
     if (error.response?.status === 401 && !originalRequest._retry && AuthService.hasAccessToken()) {
         originalRequest._retry = true;
